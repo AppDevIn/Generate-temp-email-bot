@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 
@@ -17,4 +19,4 @@ class EmailGenerate:
         url = self.url + "/domains/"
         payload = {}
         response = requests.request("GET", url, headers=self.header, data=payload)
-        return response
+        return json.loads(response.text)
