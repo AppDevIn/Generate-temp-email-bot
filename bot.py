@@ -1,5 +1,7 @@
 import os
 import json
+import uuid
+
 from emailGenerate import EmailGenerate
 from flask import Flask, request
 from TelegramBot8 import Message, TeleBot, Update, ParseMode, InlineKeyboard, InlineKeyboardButton, CallBackQuery
@@ -33,6 +35,10 @@ def domain_list(message: Message):
 @bot.callback_handler("generate_mail")
 def generate_mail(callback: CallBackQuery):
     callback.answer("Generating e-mail")
+    email = str(uuid.uuid4().int) + "@mailkept.com"
+    hash_value = emailGenerate.generate_email(email)
+    print(hash_value)
+    bot.send_message(callback.message.chat.id, email)
 
 
 @app.route('/', methods=["POST"])
@@ -43,5 +49,5 @@ def update():
 
 if __name__ == "__main__":
     bot._set_commands()
-    bot.set_webhook("https://reception-elementary-diana-dan.trycloudflare.com")
+    bot.set_webhook("https://vids-battery-stood-usda.trycloudflare.com")
     app.run()
