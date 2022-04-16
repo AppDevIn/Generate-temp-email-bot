@@ -25,14 +25,28 @@ def domain_list(message: Message):
     listOfDomain = emailGenerate.get_domains()
     payload = "<b>List of domains:</b>"
     keybaords = InlineKeyboard()
-
+    column1 = []
+    column2 = []
     for index, mail in enumerate(listOfDomain):
-        button = InlineKeyboardButton(text=mail, callback_data="generate_mail")
-        keybaords.add(button)
+        button = InlineKeyboardButton(text=mail, callback_data="generate_mail"+mail)
+        if index % 2 == 0:
+            column2.append(button)
+        else:
+            column1.append(button)
+
+    for index in range(0, max(len(column1), len(column2))):
+        row = []
+        if index <= len(column1)-1:
+            row.append(column1[index])
+        if index <= len(column2)-1:
+            row.append(column2[index])
+
+        keybaords.add(row)
+
     bot.send_message(message.chat.id, payload, parse_mode=ParseMode.HTML, reply_markup=keybaords)
 
 
-@bot.callback_handler("generate_mail")
+@bot.callback_handler(regex="^generate_mail@.*$")
 def generate_mail(callback: CallBackQuery):
     callback.answer("Generating e-mail")
     email = str(uuid.uuid4().int) + "@mailkept.com"
@@ -48,6 +62,5 @@ def update():
 
 
 if __name__ == "__main__":
-    bot._set_commands()
-    bot.set_webhook("https://vids-battery-stood-usda.trycloudflare.com")
+    bot.set_webhook("https://all-wt-work-obtain.trycloudflare.com")
     app.run()
