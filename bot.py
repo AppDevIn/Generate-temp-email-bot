@@ -49,7 +49,7 @@ def domain_list(message: Message):
 @bot.callback_handler(regex="^generate_mail@.*$")
 def generate_mail(callback: CallBackQuery):
     callback.answer("Generating e-mail")
-    email = str(uuid.uuid4().int) + "@mailkept.com"
+    email = str(uuid.uuid4().int) + "@" + callback.data.split("@")[1]
     hash_value = emailGenerate.generate_email(email)
     print(hash_value)
     bot.send_message(callback.message.chat.id, email)
