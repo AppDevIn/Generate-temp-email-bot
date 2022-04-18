@@ -1,6 +1,10 @@
 import json
 import hashlib
+from typing import List
+
 import requests
+
+from models import mail_from_dict, Mail
 
 
 class EmailGenerate:
@@ -21,18 +25,26 @@ class EmailGenerate:
         response = requests.request("GET", url, headers=self.header, data=payload)
         return json.loads(response.text)
 
-    def generate_email(self, email):
+    def get_hash(self, email):
         md5_hash = hashlib.md5()
         md5_hash.update(bytes(email, 'utf-8'))
 
         hash_value = md5_hash.hexdigest()
         return hash_value
 
-    def check_email(self, hash_value):
+    def check_email(self, hash_value) -> Mail:
         url = self.url + f"/mail/id/{hash_value}/"
         payload = {}
-        response = requests.request("GET", url, headers=self.header, data=payload)
-        return json.loads(response.text)
+        response = json.loads(requests.request("GET", url, headers=self.header, data=payload).text)
+        mailDict = {
+            "error": None,
+            "data": []
+        }
+        if isinstance(response, List):
+            mailDict["data"] = response
+        else:
+            mailDict["error"] = response["error"]
+        return mail_from_dict(mailDict)
 
 
 
