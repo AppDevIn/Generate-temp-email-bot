@@ -21,7 +21,7 @@ class EmailGenerate:
         response = requests.request("GET", url, headers=self.header, data=payload)
         return json.loads(response.text)
 
-    def generate_email(self, email):
+    def get_hash(self, email):
         md5_hash = hashlib.md5()
         md5_hash.update(bytes(email, 'utf-8'))
 

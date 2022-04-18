@@ -50,9 +50,10 @@ def domain_list(message: Message):
 def generate_mail(callback: CallBackQuery):
     callback.answer("Generating e-mail")
     email = str(uuid.uuid4().int) + "@" + callback.data.split("@")[1]
-    hash_value = emailGenerate.generate_email(email)
+    hash_value = emailGenerate.get_hash(email)
     print(hash_value)
-    bot.send_message(callback.message.chat.id, email)
+    messageLoad = f"<b>Email Address</b>: {email}"
+    bot.send_message(callback.message.chat.id,messageLoad, parse_mode=ParseMode.HTML)
 
 
 @app.route('/', methods=["POST"])
@@ -62,5 +63,5 @@ def update():
 
 
 if __name__ == "__main__":
-    bot.set_webhook("https://all-wt-work-obtain.trycloudflare.com")
+    bot.set_webhook("https://parenting-classical-tradition-per.trycloudflare.com")
     app.run()
