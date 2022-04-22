@@ -25,7 +25,7 @@ def hi(message: Message):
     bot.send_message(message.chat.id, "Hello")
 
 
-@bot.add_command_menu_helper(command="/domain_list", description="Command to get the list of domain")
+@bot.add_command_menu_helper(command="/generate_email", description="Command to get the list of domain")
 def domain_list(message: Message):
     listOfDomain = emailGenerate.get_domains()
     payload = "<b>List of domains:</b>"
