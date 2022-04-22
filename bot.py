@@ -28,7 +28,7 @@ def hi(message: Message):
 @bot.add_command_menu_helper(command="/generate_email", description="Command to get the list of domain")
 def domain_list(message: Message):
     listOfDomain = emailGenerate.get_domains()
-    payload = "<b>List of domains:</b>"
+    payload = "<b>Pick a domain:</b>"
     keybaords = InlineKeyboard()
     column1 = []
     column2 = []
