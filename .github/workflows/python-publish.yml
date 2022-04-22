@@ -31,6 +31,7 @@ jobs:
           python -m unittest discover test -p '*Test.py'
   deploy_heroku:
     needs: test
+    name: Deploy to Heroku
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -41,8 +42,9 @@ jobs:
           heroku_email: "teamprojectlive@gmail.com"
           usedocker: true
   release:
-    runs-on: ubuntu-latest
     needs: deploy_heroku
+    name: Generating Release
+    runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
