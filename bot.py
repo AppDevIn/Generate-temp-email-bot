@@ -13,6 +13,8 @@ app = Flask(__name__)
 
 TELE_API_KEY = os.getenv('telegramApiKey')
 RAPID_API_KEY = os.getenv('rapidApiKey')
+PORT = int(os.environ.get('PORT', 5000))
+HOST = os.environ.get('HOST', "0.0.0.0")
 
 bot = TeleBot(TELE_API_KEY)
 emailGenerate = EmailGenerate(RAPID_API_KEY)
@@ -95,5 +97,6 @@ def update():
 
 
 if __name__ == "__main__":
-    bot.set_webhook("https://parenting-classical-tradition-per.trycloudflare.com")
+    app.run(debug=True, host=HOST, port=PORT)
+    bot.set_webhook(f"{HOST}:{PORT}")
     app.run()
