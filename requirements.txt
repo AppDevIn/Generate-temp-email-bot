@@ -8,7 +8,7 @@ itsdangerous==2.1.2
 Jinja2==3.1.1
 MarkupSafe==2.1.1
 requests==2.26.0
-Telegram-Bot8==0.2.4
+Telegram-Bot8==0.2.6
 typing-extensions==4.1.1
 urllib3==1.26.7
 Werkzeug==2.1.1
