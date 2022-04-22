@@ -1,1 +1,1 @@
-# generate-gmail-bot
+# Generate Email Bot
