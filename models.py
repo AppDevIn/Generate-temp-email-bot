@@ -191,7 +191,7 @@ class Mail:
     data: Optional[List[Datum]] = None
 
     def hasData(self) -> bool:
-        return self.data is not []
+        return self.data is []
 
     @staticmethod
     def from_dict(obj: Any) -> 'Mail':
